@@ -1,0 +1,107 @@
+### Variables
+@baseUrl = http://localhost:7071/api
+@functionKey = 
+
+### Add UPI Payment - Success
+POST {{baseUrl}}/upi/payment
+Content-Type: application/json
+
+{
+  "transactionId": "UPI2025112301",
+  "upiId": "john.doe@paytm",
+  "merchantName": "Amazon India",
+  "amount": 1299.99,
+  "currency": "INR",
+  "description": "Wireless Mouse and Keyboard",
+  "category": "Shopping",
+  "transactionDate": "2025-11-23T01:30:00Z",
+  "status": "Success"
+}
+
+### Add UPI Payment - Food
+POST {{baseUrl}}/upi/payment
+Content-Type: application/json
+
+{
+  "transactionId": "UPI2025112302",
+  "upiId": "john.doe@paytm",
+  "merchantName": "Swiggy",
+  "amount": 450.00,
+  "currency": "INR",
+  "description": "Dinner order",
+  "category": "Food & Dining",
+  "transactionDate": "2025-11-23T02:00:00Z",
+  "status": "Success"
+}
+
+### Add UPI Payment - Transportation
+POST {{baseUrl}}/upi/payment
+Content-Type: application/json
+
+{
+  "transactionId": "UPI2025112303",
+  "upiId": "john.doe@paytm",
+  "merchantName": "Uber",
+  "amount": 250.00,
+  "currency": "INR",
+  "description": "Ride to office",
+  "category": "Transportation",
+  "transactionDate": "2025-11-23T08:30:00Z",
+  "status": "Success"
+}
+
+### Add UPI Payment - Bills
+POST {{baseUrl}}/upi/payment
+Content-Type: application/json
+
+{
+  "transactionId": "UPI2025112304",
+  "upiId": "john.doe@paytm",
+  "merchantName": "Electricity Board",
+  "amount": 1850.00,
+  "currency": "INR",
+  "description": "Monthly electricity bill",
+  "category": "Bills & Utilities",
+  "transactionDate": "2025-11-23T10:00:00Z",
+  "status": "Success"
+}
+
+### Get All Expenses
+GET {{baseUrl}}/expenses
+
+### Get Expenses - Filter by Category
+GET {{baseUrl}}/expenses?category=Shopping
+
+### Get Expenses - Filter by Date Range
+GET {{baseUrl}}/expenses?startDate=2025-11-23&endDate=2025-11-24
+
+### Get Expenses - With Limit
+GET {{baseUrl}}/expenses?limit=5
+
+### Get Expense by ID (replace with actual ID)
+GET {{baseUrl}}/expenses/3fa85f64-5717-4562-b3fc-2c963f66afa6
+
+### Test Duplicate Transaction (should return 409 Conflict)
+POST {{baseUrl}}/upi/payment
+Content-Type: application/json
+
+{
+  "transactionId": "UPI2025112301",
+  "upiId": "john.doe@paytm",
+  "merchantName": "Amazon India",
+  "amount": 1299.99,
+  "currency": "INR",
+  "description": "Duplicate test",
+  "category": "Shopping",
+  "transactionDate": "2025-11-23T01:30:00Z",
+  "status": "Success"
+}
+
+### Test Invalid Request (missing required fields)
+POST {{baseUrl}}/upi/payment
+Content-Type: application/json
+
+{
+  "transactionId": "UPI2025112305",
+  "amount": 100.00
+}
